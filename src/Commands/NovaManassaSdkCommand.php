@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Egately\NovaManassaSdk\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class NovaManassaSdkCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'nova-manassa-sdk';
 
     public $description = 'My command';
 
