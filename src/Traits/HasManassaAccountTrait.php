@@ -9,7 +9,7 @@ trait HasManassaAccountTrait
 
     public function manassaAccount()
     {
-        return $this->morphOne(\Egately\NovaManassaSdk\Models\EgateManssa::class, 'manssaable');
+        return $this->morphOne(\Egately\NovaManassaSdk\Models\EgateManassa::class, 'manssaable');
     }
 
 
