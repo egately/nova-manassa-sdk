@@ -17,7 +17,7 @@ class NovaManassaSdk
 
 
     public function CreateAccount(
-        int $egate_manassa_id,
+        int    $remote_id,
         string $name,                   // required
         string $email,                  // required to send Invoices To if enabled
         string $type = 'personal',      //'personal' or 'business'
@@ -33,18 +33,18 @@ class NovaManassaSdk
     )
     {
         $Data = [
-            'remote_id' => $egate_manassa_id,
-            'name' => $name ,
-            'email' => $email ,
-            'type' => $type ,
-            'phone' => $phone ,
-            'address_1' => $address_1 ,
-            'city_id' => $city_id ,
-            'country_id' => $country_id ,
-            'postal_code' => $postal_code ,
-            'website' => $website ,
-            'latitude' => $latitude ,
-            'longitude' => $longitude ,
+            'remote_id' => $remote_id,
+            'name' => $name,
+            'email' => $email,
+            'type' => $type,
+            'phone' => $phone,
+            'address_1' => $address_1,
+            'city_id' => $city_id,
+            'country_id' => $country_id,
+            'postal_code' => $postal_code,
+            'website' => $website,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
         ];
         $Data = array_filter($Data);
 
