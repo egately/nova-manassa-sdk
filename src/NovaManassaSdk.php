@@ -3,6 +3,8 @@
 namespace Egately\NovaManassaSdk;
 
 use Egately\NovaManassaSdk\Actions\AccountActions;
+use Egately\NovaManassaSdk\Actions\ManssaClient;
+use Illuminate\Support\Facades\Log;
 
 class NovaManassaSdk
 {
@@ -53,4 +55,35 @@ class NovaManassaSdk
         return $Account;
 
     }
+
+
+    public function syncProduct($data){
+
+
+        $endpoint = 'product/sync';
+        try {
+            $resposne = app(ManssaClient::class)->sendPost($data, $endpoint);
+            return (array)$resposne;
+        } catch (\Exception $e) {
+            Log::error($e);
+            throw new \Exception('Manassa Connection Error - F69');
+        }
+
+    }
+
+    public function syncProductItem($data){
+
+
+        $endpoint = 'product/item/sync';
+        try {
+            $resposne = app(ManssaClient::class)->sendPost($data, $endpoint);
+            return (array)$resposne;
+        } catch (\Exception $e) {
+            Log::error($e);
+            throw new \Exception('Manassa Connection Error - F83');
+        }
+
+    }
+
+
 }
