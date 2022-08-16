@@ -14,8 +14,7 @@ class AccountActions
 
     public function CreateAccount($Data)
     {
-      $payload = $this->BuildPayLoad($Data);
-      $endpoint = '/account';
+        $endpoint = 'account';
         try {
             $resposne = app(ManssaClient::class)->sendPost($Data, $endpoint);
             return $this->AddAccount($resposne);
@@ -28,7 +27,7 @@ class AccountActions
     protected function AddAccount($data)
     {
 
-        if($data  && $data['status'] == 'success')
+        if(isset($data['data'])  && isset($data['data']['id']) && $data['data']['id'] )
         {
             return $data['data'];
         }
