@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('egate_manassa', function (Blueprint $table) {
                    $table->id();
-                   $table->morphs('manassaable');
-                   $table->string('manassa_id', 191)->nullable();
+                   $table->morphs('manassable');
+                   $table->string('manassa_id', 191)->nullable()->unique();
                    $table->string('manassa_name', 191)->nullable();
                    $table->string('status')->nullable();
                    $table->timestamps();

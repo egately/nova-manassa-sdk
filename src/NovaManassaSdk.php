@@ -20,7 +20,7 @@ class NovaManassaSdk
         int    $remote_id,
         string $name,                   // required
         string $email,                  // required to send Invoices To if enabled
-        string $type = 'personal',      //'personal' or 'business'
+        string $type = 'subscriptions',      //'personal' or 'business'
         string $phone = null,           //optional +218911234567
         string $address_1 = null,       //optional
         int    $city_id = null,         //1 Tripoli , 2 Benghazi optional

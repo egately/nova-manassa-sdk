@@ -3,16 +3,34 @@
 namespace Egately\NovaManassaSdk\Traits;
 
 use Egately\NovaManassaSdk\NovaManassaSdk;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 trait HasManassaAccountTrait
 {
 
-    public function manassaAccount()
+    /**
+     * @return MorphOne
+     */
+    public function manassaAccount():MorphOne
     {
-        return $this->morphOne(\Egately\NovaManassaSdk\Models\EgateManassa::class, 'manssaable');
+        return $this->morphOne(\Egately\NovaManassaSdk\Models\EgateManassa::class, 'manassable');
     }
 
 
+    /**
+     * @param string $name
+     * @param string $email
+     * @param string $type
+     * @param string|null $phone
+     * @param string|null $address_1
+     * @param int|null $city_id
+     * @param string $country_id
+     * @param string|null $postal_code
+     * @param string|null $website
+     * @param string|null $latitude
+     * @param string|null $longitude
+     * @return mixed
+     */
     public function AddAccount(
 
         string $name,                   // required
@@ -28,9 +46,13 @@ trait HasManassaAccountTrait
         string $longitude = null,       //optional
     )
     {
-        $RemoteId = $this->manassaAccount()->insertGetId([]);
+
+
+        //  $RemoteId = $this->manassaAccount()->create([]);
+
+
         $accounnt = app(NovaManassaSdk::class)->CreateAccount(
-            remote_id: $RemoteId,
+            remote_id: $this->id,
             name: $name,
             email: $email,
             type: $type,
@@ -46,7 +68,7 @@ trait HasManassaAccountTrait
 
         if($accounnt)
         {
-            $this->manassaAccount()->update(['manassa_id' => $accounnt['id'], 'manassa_name' => $accounnt['name'], 'status' => 'active']);
+            $this->manassaAccount()->update(['manassa_id' => $accounnt['id'], 'status' => 'active']);
         }
         return $accounnt;
 
