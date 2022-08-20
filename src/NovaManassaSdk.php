@@ -4,6 +4,8 @@ namespace Egately\NovaManassaSdk;
 
 use Egately\NovaManassaSdk\Actions\AccountActions;
 use Egately\NovaManassaSdk\Actions\ManssaClient;
+use Egately\NovaManassaSdk\Models\EgateManassa;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
 class NovaManassaSdk
@@ -86,4 +88,27 @@ class NovaManassaSdk
     }
 
 
+    public function CreateOrder(string $object ,EgateManassa $account,Model $ProductItem,  $currencyCode )
+    {
+
+        $Order =[
+
+            'object' => $object,
+            'account_id' => $account->id,
+            'product_id' => $ProductItem->product->id,
+            'product_item_id' => $ProductItem->id,
+            'currency'=>$currencyCode,
+        ];
+
+        $endpoint = 'order';
+        try {
+            $resposne = app(ManssaClient::class)->sendPost($Order, $endpoint);
+            return (array)$resposne;
+        } catch (\Exception $e) {
+            Log::error($e);
+            throw new \Exception('Manassa Connection Error - F83');
+        }
+
+
+    }
 }
