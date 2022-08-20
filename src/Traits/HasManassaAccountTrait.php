@@ -37,7 +37,7 @@ trait HasManassaAccountTrait
 
         string $name,                   // required
         string $email,                  // required to send Invoices To if enabled
-        string $type = 'personal',      //'personal' or 'business'
+        string $type = 'subscriptions',      //'subscriptions' or 'business'
         string $phone = null,           //optional +218911234567
         string $address_1 = null,       //optional
         int    $city_id = null,         //1 Tripoli , 2 Tripoli optional
@@ -78,14 +78,17 @@ trait HasManassaAccountTrait
 
     public function hasValidSubscription(Model $product)
     {
-//        'tenant_id' => 'required|exists:tenants,id',
-//            'account_id' => 'required|exists:accounts,id',
-//            'product_id' => 'required_without:product_name|exists:products,id',
-//            'product_name' => 'required_without:product_id|exists:product_types,name',
+
+        if(!$this->manassaAccount()->exists()  || $this->manassaAccount->manassa_id == Null)
+        {
+          $this->AddAccount($this->name, $this->email);
+        }
         $subscriptionData = [
-            'account_id'=>$this->manassaAccount->id,
+            'account_id'=>$this->manassaAccount->manassa_id,
             'product_id' => $product->manassa_product_id,
         ];
+
+
 
          return app(AccountActions::class)->GetValidSubscription($subscriptionData);
       //  return $this->manassaAccount()->where('status', 'active')->exists();
