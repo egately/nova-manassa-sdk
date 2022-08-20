@@ -2,7 +2,9 @@
 
 namespace Egately\NovaManassaSdk\Traits;
 
+use Egately\NovaManassaSdk\Actions\AccountActions;
 use Egately\NovaManassaSdk\NovaManassaSdk;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 trait HasManassaAccountTrait
@@ -72,5 +74,20 @@ trait HasManassaAccountTrait
         }
         return $accounnt;
 
+    }
+
+    public function hasValidSubscription(Model $product)
+    {
+//        'tenant_id' => 'required|exists:tenants,id',
+//            'account_id' => 'required|exists:accounts,id',
+//            'product_id' => 'required_without:product_name|exists:products,id',
+//            'product_name' => 'required_without:product_id|exists:product_types,name',
+        $subscriptionData = [
+            'account_id'=>$this->manassaAccount->id,
+            'product_id' => $product->manassa_product_id,
+        ];
+
+         return app(AccountActions::class)->GetValidSubscription($subscriptionData);
+      //  return $this->manassaAccount()->where('status', 'active')->exists();
     }
 }
