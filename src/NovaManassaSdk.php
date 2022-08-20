@@ -94,7 +94,7 @@ class NovaManassaSdk
         $Order =[
 
             'object' => $object,
-            'account_id' => $account->id,
+            'account_id' => $account->manassa_id??Null,
             'product_id' => $ProductItem->product->id,
             'product_item_id' => $ProductItem->id,
             'currency'=>$currencyCode,
