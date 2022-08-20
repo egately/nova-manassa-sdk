@@ -95,8 +95,8 @@ class NovaManassaSdk
 
             'object' => $object,
             'account_id' => $account->manassa_id??Null,
-            'product_id' => $ProductItem->product->id,
-            'product_item_id' => $ProductItem->id,
+            'product_id' => $ProductItem->product->manassa_product_id,
+            'product_item_id' => $ProductItem->manassa_product_item_id,
             'currency'=>$currencyCode,
         ];
 
