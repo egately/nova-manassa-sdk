@@ -84,7 +84,7 @@ trait HasManassaAccountTrait
         {
             $this->AddAccount($this->name, $this->email);
         }
-        $product = App\Models\Product::active()->where('type', 'subscription')->first();
+        $product = \App\Models\Product::active()->where('type', 'subscription')->first();
 
         $subscriptionData = [
             'account_id'=>$this->manassaAccount->manassa_id,
