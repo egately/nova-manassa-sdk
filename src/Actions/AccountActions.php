@@ -49,15 +49,16 @@ class AccountActions
             throw new \Exception('Manassa Connection Error - F49');
         }
 
-        if(isset($resposne['data'])  && isset($resposne['data']['id']) && $resposne['data']['id'] )
+        if(isset($resposne['has_valid_subscription'])  && $resposne['has_valid_subscription'] )
         {
-            return $data['data'];
+            return $resposne['data'];
         }
         else
         {
-           Log::info('GetValidSubscription 58 ' , [$resposne]);
-           return json_decode($resposne, true);
+            Log::info('GetValidSubscription 58 ' , [$resposne]);
+            return $resposne;
         }
+
     }
 
 }
