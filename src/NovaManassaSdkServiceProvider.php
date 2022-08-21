@@ -19,7 +19,8 @@ class NovaManassaSdkServiceProvider extends PackageServiceProvider
             ->name('nova-manassa-sdk')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_nova-manassa-sdk_table');
+            ->hasMigration('create_nova-manassa-sdk_table')
+            ->hasRoute('api');
 
 
 //            ->hasCommand(NovaManassaSdkCommand::class);

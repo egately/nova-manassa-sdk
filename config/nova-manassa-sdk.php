@@ -10,4 +10,8 @@ return [
     'manassa_url' => env('MANASSA_URL', 'https://manassa.egately.com'),
 
 
+    'manassa_status_change_controller_class'=>'',
+
+    'manassa_status_change_controller_method'=>'',
+
 ];
