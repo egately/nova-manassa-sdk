@@ -2,6 +2,7 @@
 
 namespace Egately\NovaManassaSdk\Traits;
 
+use App\Models\Product;
 use Egately\NovaManassaSdk\Actions\AccountActions;
 use Egately\NovaManassaSdk\NovaManassaSdk;
 use Illuminate\Database\Eloquent\Model;
@@ -76,13 +77,15 @@ trait HasManassaAccountTrait
 
     }
 
-    public function hasValidSubscription(Model $product)
+    public function hasValidSubscription()
     {
 
         if(!$this->manassaAccount()->exists()  || $this->manassaAccount->manassa_id == Null)
         {
-          $this->AddAccount($this->name, $this->email);
+            $this->AddAccount($this->name, $this->email);
         }
+        $product = App\Models\Product::active()->where('type', 'subscription')->first();
+
         $subscriptionData = [
             'account_id'=>$this->manassaAccount->manassa_id,
             'product_id' => $product->manassa_product_id,
@@ -90,7 +93,9 @@ trait HasManassaAccountTrait
 
 
 
-         return app(AccountActions::class)->GetValidSubscription($subscriptionData);
-      //  return $this->manassaAccount()->where('status', 'active')->exists();
+        $Valid = app(AccountActions::class)->GetValidSubscription($subscriptionData);
+
+        return $Valid;
+        //  return $this->manassaAccount()->where('status', 'active')->exists();
     }
 }
