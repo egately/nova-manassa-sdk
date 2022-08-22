@@ -86,6 +86,19 @@ class NovaManassaSdk
         }
 
     }
+    public function syncSubscritions($data){
+
+
+        $endpoint = 'subscription/sync';
+        try {
+            $resposne = app(ManssaClient::class)->sendPost($data, $endpoint);
+            return (array)$resposne;
+        } catch (\Exception $e) {
+            Log::error($e);
+            throw new \Exception('Manassa Connection Error - F83');
+        }
+
+    }
 
 
     public function CreateOrder(string $object ,EgateManassa $account,Model $ProductItem,  $currencyCode )
